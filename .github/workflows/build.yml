@@ -1,0 +1,45 @@
+name: build-projects
+
+on:
+  push:
+    branches:
+      - dev
+
+env:
+  PROJECT_NAME: ${{ secrets.GCP_PROJECT }}
+  PROJECT_REGION: "us-west2"
+  REGISTRY_NAME: "demo"
+  IMAGE_NAME: "develop"
+  IMAGE_TAG: ${{ github.sha }}
+  IMAGE_URI: ${{ env.PROJECT_REGION }}-docker.pkg.dev/${{ env.PROJECT_NAME }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: $PROJECT_NAME
+
+      - name: Authenticate Docker
+        run: |
+          gcloud auth configure-docker $PROJECT_REGION-docker.pkg.dev
+
+      - name: Build and Push Docker image using Cache
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ env.IMAGE_URI }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
