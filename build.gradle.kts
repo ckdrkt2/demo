@@ -52,3 +52,9 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+tasks.bootJar {
+    mainClass.set("com.qkqhro.demo.DemoApplicationKt")
+    archiveFileName.set("ditto.jar")
+}
+
