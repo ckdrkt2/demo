@@ -9,6 +9,7 @@ COPY build.gradle.kts settings.gradle.kts gradlew ./
 # Copy the source and build it
 COPY src src
 RUN ./gradlew ktlintFormat build -x test
+RUN ls /usr/app/build/libs
 
 # Final stage
 FROM openjdk:17-jdk-slim-buster
