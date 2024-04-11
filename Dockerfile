@@ -4,7 +4,7 @@ FROM openjdk:17-jdk-slim-buster AS TEMP_BUILD_IMAGE
 # Copy only necessary dependency files for caching purposes
 WORKDIR /usr/app
 COPY gradle gradle
-COPY build.gradle.kts settings.gradle.kts gradlew .editorconfig ./
+COPY build.gradle.kts settings.gradle.kts gradlew ./
 
 # Copy the source and build it
 COPY src src
