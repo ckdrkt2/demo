@@ -57,4 +57,3 @@ tasks.bootJar {
     mainClass.set("com.qkqhro.demo.DemoApplicationKt")
     archiveFileName.set("ditto.jar")
 }
-
