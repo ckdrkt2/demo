@@ -34,11 +34,8 @@ jobs:
         run: |
           gcloud auth configure-docker $PROJECT_REGION-docker.pkg.dev
 
-      - name: Build and Push Docker image using Cache
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          push: true
-          tags: $IMAGE_URI
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+      - name: Build image
+        run: docker build -t $IMAGE_URI .
+
+      - name: Push image
+        run: docker push $IMAGE_URI
