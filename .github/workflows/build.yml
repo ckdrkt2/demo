@@ -6,12 +6,11 @@ on:
       - dev
 
 env:
-  PROJECT_NAME: ${{ secrets.GCP_PROJECT }}
   PROJECT_REGION: "us-west2"
   REGISTRY_NAME: "demo"
   IMAGE_NAME: "develop"
   IMAGE_TAG: ${{ github.sha }}
-  IMAGE_URI: $PROJECT_REGION-docker.pkg.dev/$PROJECT_NAME/$REGISTRY_NAME/$IMAGE_NAME:$IMAGE_TAG
+  IMAGE_URI: $PROJECT_REGION-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/$REGISTRY_NAME/$IMAGE_NAME:$IMAGE_TAG
 
 jobs:
   build:
@@ -29,7 +28,7 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
-          project_id: $PROJECT_NAME
+          project_id: ${{ secrets.GCP_PROJECT }}
 
       - name: Authenticate Docker
         run: |
