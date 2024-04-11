@@ -11,7 +11,7 @@ env:
   REGISTRY_NAME: "demo"
   IMAGE_NAME: "develop"
   IMAGE_TAG: ${{ github.sha }}
-  IMAGE_URI: ${{ env.PROJECT_REGION }}-docker.pkg.dev/${{ env.PROJECT_NAME }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+  IMAGE_URI: $PROJECT_REGION-docker.pkg.dev/$PROJECT_NAME/$REGISTRY_NAME/$IMAGE_NAME:$IMAGE_TAG
 
 jobs:
   build:
@@ -40,6 +40,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_URI }}
+          tags: $IMAGE_URI
           cache-from: type=gha
           cache-to: type=gha,mode=max
