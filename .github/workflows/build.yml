@@ -6,8 +6,8 @@ on:
       - dev
 
 env:
-  PROJECT_REGION: "us-west2"
-  REGISTRY_NAME: "demo"
+  PROJECT_REGION: us-west2
+  REGISTRY_NAME: demo
 
 jobs:
   build:
@@ -24,7 +24,7 @@ jobs:
 
       - name: Set IMAGE_URI environment variable
         run: |
-          echo "IMAGE_URI=us-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/demo/$IMAGE_NAME:${{ github.sha }}" >> $GITHUB_ENV
+          echo "IMAGE_URI=$PROJECT_REGION-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/$REGISTRY_NAME/$IMAGE_NAME:${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v3
