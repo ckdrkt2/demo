@@ -8,15 +8,21 @@ on:
 env:
   PROJECT_REGION: "us-west2"
   REGISTRY_NAME: "demo"
-  IMAGE_NAME: "develop"
-  IMAGE_TAG: ${{ github.sha }}
-  IMAGE_URI: us-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/demo/develop:${{ github.sha }}
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set environment variable based on branch
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "IMAGE_NAME=release" >> $GITHUB_ENV
+          elif [ "${{ github.ref }}" = "refs/heads/dev" ]; then
+            echo "IMAGE_NAME=develop" >> $GITHUB_ENV
+          fi
+          echo "IMAGE_URI=us-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/demo/$IMAGE_NAME:${{ github.sha }}"
+
       - name: Checkout code
         uses: actions/checkout@v3
 
