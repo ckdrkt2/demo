@@ -21,7 +21,7 @@ jobs:
           elif [ "${{ github.ref }}" = "refs/heads/dev" ]; then
             echo "IMAGE_NAME=develop" >> $GITHUB_ENV
           fi
-          echo "IMAGE_URI=us-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/demo/$IMAGE_NAME:${{ github.sha }}"
+          echo "IMAGE_URI=us-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/demo/$IMAGE_NAME:${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v3
