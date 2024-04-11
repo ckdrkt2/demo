@@ -10,7 +10,7 @@ env:
   REGISTRY_NAME: "demo"
   IMAGE_NAME: "develop"
   IMAGE_TAG: ${{ github.sha }}
-  IMAGE_URI: ${{ env.PROJECT_REGION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/${{ env.REGISTRY_NAME }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+  IMAGE_URI: us-west2-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/demo/develop:${{ github.sha }}
 
 jobs:
   build:
