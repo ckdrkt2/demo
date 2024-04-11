@@ -10,7 +10,7 @@ env:
   REGISTRY_NAME: "demo"
   IMAGE_NAME: "develop"
   IMAGE_TAG: ${{ github.sha }}
-  IMAGE_URI: $PROJECT_REGION-docker.pkg.dev/${{ secrets.GCP_PROJECT }}/$REGISTRY_NAME/$IMAGE_NAME:$IMAGE_TAG
+  IMAGE_URI: $PROJECT_REGION-docker.pkg.dev/dazzling-byway-418414/$REGISTRY_NAME/$IMAGE_NAME:$IMAGE_TAG
 
 jobs:
   build:
