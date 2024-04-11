@@ -6,7 +6,7 @@ on:
       - dev
 
 env:
-  PROJECT_NAME: ${{ env.GCP_PROJECT }}
+  PROJECT_NAME: ${{ secrets.GCP_PROJECT }}
   PROJECT_REGION: "us-west2"
   REGISTRY_NAME: "demo"
   IMAGE_NAME: "develop"
