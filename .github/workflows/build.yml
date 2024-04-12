@@ -62,8 +62,8 @@ jobs:
       - name: Push manifest
         run: |
           set -x
-          git config user.name ${{ secrets.USERNAME }}
-          git config user.email ${{ secrets.EMAIL }}
+          git config --global user.name ${{ secrets.USERNAME }}
+          git config --global user.email ${{ secrets.EMAIL }}
           cd $REGISTRY_NAME-deploy && \
           git add deployment.yaml && \
           git commit -m "Deploying image $IMAGE_URI" && \
