@@ -57,7 +57,7 @@ jobs:
 
       - name: Generate manifest
         run: |
-          sed "s/IMAGE_URI/$IMAGE_URI/g" deployment.yaml.tpl > $REGISTRY_NAME-deploy/deployment.yaml
+          sed "s|IMAGE_URI|$IMAGE_URI|g" deployment.yaml.tpl > $REGISTRY_NAME-deploy/deployment.yaml
 
       - name: Push manifest
         run: |
